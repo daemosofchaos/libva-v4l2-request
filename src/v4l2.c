@@ -487,6 +487,8 @@ int v4l2_open_decoder(const unsigned int *slice_formats, int num_formats, unsign
         if (fd < 0)
             continue;
         for (fmtidx = 0; fmtidx < num_formats; fmtidx++) {
+			request_log("Probing /dev/video%d for codec 0x%x: %s\n", i, slice_formats[fmtidx],
+    			v4l2_find_format(fd, V4L2_BUF_TYPE_VIDEO_OUTPUT_MPLANE, slice_formats[fmtidx]) ? "found" : "not found");
             if (v4l2_find_format(fd, V4L2_BUF_TYPE_VIDEO_OUTPUT_MPLANE, slice_formats[fmtidx])) {
                 if (out_pixfmt)
                     *out_pixfmt = slice_formats[fmtidx];
