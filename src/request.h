@@ -45,8 +45,6 @@
 #define V4L2_REQUEST_MAX_SUBPIC_FORMATS		4
 #define V4L2_REQUEST_MAX_DISPLAY_ATTRIBUTES	4
 
-unsigned int codec_pixfmt;
-
 struct request_data {
 	struct object_heap config_heap;
 	struct object_heap context_heap;
@@ -55,6 +53,7 @@ struct request_data {
 	struct object_heap image_heap;
 	int video_fd;
 	int media_fd;
+	unsigned int codec_pixfmt;
 
 	struct video_format *video_format;
 };
