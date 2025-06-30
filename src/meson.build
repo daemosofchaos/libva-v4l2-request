@@ -39,6 +39,7 @@ sources = [
 	'image.c',
 	'utils.c',
 	'tiled_yuv.S',
+	'tiled_yuv.c',
 	'video.c',
 	'media.c',
 	'v4l2.c',
