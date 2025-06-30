@@ -474,3 +474,23 @@ int v4l2_set_stream(int video_fd, unsigned int type, bool enable)
 
 	return 0;
 }
+
+int v4l2_open_decoder(const unsigned int *slice_formats, int num_formats, unsigned int *out_pixfmt) {
+    char dev[32];
+    int fd, i, fmtidx;
+    for (i = 0; i < 64; i++) {
+        snprintf(dev, sizeof(dev), "/dev/video%d", i);
+        fd = open(dev, O_RDWR | O_NONBLOCK);
+        if (fd < 0)
+            continue;
+        for (fmtidx = 0; fmtidx < num_formats; fmtidx++) {
+            if (v4l2_find_format(fd, V4L2_BUF_TYPE_VIDEO_OUTPUT_MPLANE, slice_formats[fmtidx])) {
+                if (out_pixfmt)
+                    *out_pixfmt = slice_formats[fmtidx];
+                return fd; // Found a matching decoder!
+            }
+        }
+        close(fd);
+    }
+    return -1;
+}

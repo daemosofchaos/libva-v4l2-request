@@ -146,11 +146,15 @@ VAStatus VA_DRIVER_INIT_FUNC(VADriverContextP context)
 	object_heap_init(&driver_data->image_heap, sizeof(struct object_image),
 			 IMAGE_ID_OFFSET);
 
+	unsigned int codecs[] = { V4L2_PIX_FMT_HEVC_SLICE, V4L2_PIX_FMT_H264_SLICE };
+	unsigned int selected_pixfmt = 0;
 	video_path = getenv("LIBVA_V4L2_REQUEST_VIDEO_PATH");
-	if (video_path == NULL)
-		video_path = "/dev/video0";
-
-	video_fd = open(video_path, O_RDWR | O_NONBLOCK);
+	if (video_path != NULL) {
+		video_fd = open(video_path, O_RDWR | O_NONBLOCK);
+		// Optionally: you could probe here for codec as well to set selected_pixfmt
+	} else {
+		video_fd = v4l2_open_decoder(codecs, 2, &selected_pixfmt);
+	}
 	if (video_fd < 0)
 		return VA_STATUS_ERROR_OPERATION_FAILED;
 
