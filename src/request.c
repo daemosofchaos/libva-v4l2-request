@@ -164,7 +164,7 @@ VAStatus VA_DRIVER_INIT_FUNC(VADriverContextP context)
 	// Track the selected codec in driver_data
 	driver_data->codec_pixfmt = selected_pixfmt;
 
-	request_log("Opened device: %d (fd %d), selected codec pixfmt: 0x%x\n", device_number, video_fd, selected_pixfmt);
+	request_log("Opened device: (fd %d), selected codec pixfmt: 0x%x\n", video_fd, selected_pixfmt);
 
 	rc = v4l2_query_capabilities(video_fd, &capabilities);
 	if (rc < 0) {
