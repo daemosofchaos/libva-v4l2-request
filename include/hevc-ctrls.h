@@ -10,4 +10,4 @@
 #include <linux/v4l2-controls.h>
 
 #ifndef _HEVC_CTRLS_H_
-#define _HEVC_CTRLS_H_
+#endif

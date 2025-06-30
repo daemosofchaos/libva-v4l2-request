@@ -7,9 +7,8 @@
  * more changes. So keep them private until they are stable and ready to
  * become part of the official public API.
  */
+
 #include <linux/v4l2-controls.h>
 
 #ifndef _H264_CTRLS_H_
-#define _H264_CTRLS_H_
-
-#include <linux/videodev2.h>
+#endif
