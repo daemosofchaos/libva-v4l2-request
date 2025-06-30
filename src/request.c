@@ -31,6 +31,7 @@
 #include "picture.h"
 #include "subpicture.h"
 #include "surface.h"
+#include <fcntl.h>
 
 #include "autoconfig.h"
 

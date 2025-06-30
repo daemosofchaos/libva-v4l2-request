@@ -22,6 +22,9 @@
  * SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
  */
 
+#include <unistd.h>
+#include <stdio.h>
+#include <fcntl.h>
 #include <errno.h>
 #include <stdlib.h>
 #include <string.h>
@@ -477,8 +480,8 @@ int v4l2_set_stream(int video_fd, unsigned int type, bool enable)
 
 int v4l2_open_decoder(const unsigned int *slice_formats, int num_formats, unsigned int *out_pixfmt) {
     char dev[32];
-    int fd, i, fmtidx;
-    for (i = 0; i < 64; i++) {
+    int fd, fmtidx;
+    for (int i = 0; i < 64; i++) {
         snprintf(dev, sizeof(dev), "/dev/video%d", i);
         fd = open(dev, O_RDWR | O_NONBLOCK);
         if (fd < 0)
@@ -494,3 +497,4 @@ int v4l2_open_decoder(const unsigned int *slice_formats, int num_formats, unsign
     }
     return -1;
 }
+
